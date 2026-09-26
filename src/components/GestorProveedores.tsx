@@ -12,7 +12,6 @@ const GestorProveedores: React.FC = () => {
     setProveedorToEdit,
     loading,
     activeSection,
-    setActiveSection,
     handleInputChange,
     handleSubmit,
     handleEdit,
@@ -21,34 +20,42 @@ const GestorProveedores: React.FC = () => {
   } = useProveedores();
 
   return (
-    <div className="gestor-proveedores-container">
-      <h1>Gestor de Proveedores</h1>
+    <div className="min-h-screen bg-slate-100 p-6 md:p-10">
+      <div className="mx-auto max-w-6xl">
+        <h1 className="mb-6 text-3xl font-bold tracking-tight text-slate-900">
+          Gestor de Proveedores
+        </h1>
 
-      {activeSection === "list" && (
-        <>
-          <button onClick={goToNewProveedor} disabled={loading}>
-            Nuevo Proveedor
-          </button>
-          <ProveedorList
-            proveedores={proveedores}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
+        {activeSection === "list" && (
+          <div className="space-y-5">
+            <button
+              onClick={goToNewProveedor}
+              disabled={loading}
+              className="rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              Nuevo Proveedor
+            </button>
+            <ProveedorList
+              proveedores={proveedores}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              loading={loading}
+            />
+          </div>
+        )}
+
+        {activeSection === "form" && (
+          <ProveedorForm
+            formData={formData}
+            setFormData={setFormData}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            proveedorToEdit={proveedorToEdit}
+            setProveedorToEdit={setProveedorToEdit}
             loading={loading}
           />
-        </>
-      )}
-
-      {activeSection === "form" && (
-        <ProveedorForm
-          formData={formData}
-          setFormData={setFormData}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          proveedorToEdit={proveedorToEdit}
-          setProveedorToEdit={setProveedorToEdit}
-          loading={loading}
-        />
-      )}
+        )}
+      </div>
     </div>
   );
   

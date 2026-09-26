@@ -12,7 +12,11 @@ const ProveedorList: React.FC<ProveedorListProps> = ({
   }
 
   if (proveedores.length === 0) {
-    return <p>No hay proveedores registrados.</p>;
+    return (
+      <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-8 text-slate-600 shadow-sm">
+        <p className="text-base font-medium">No hay proveedores registrados.</p>
+      </div>
+    );
   }
 
   return (
